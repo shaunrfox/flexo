@@ -1,0 +1,60 @@
+{
+  "name": "flexiblewidth",
+  "version": "0.0.1",
+  "description": "Flex your own plex my duderoni",
+  "main": "src/app.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "dev": "webpack serve --config ./build/webpack.config.dev.js",
+    "build": "webpack --config ./build/webpack.config.js",
+    "lint": "npm run lint-js && npm run lint-scss",
+    "lint-js": "eslint --ext js --fix ./src",
+    "lint-scss": "stylelint \"src/**/*.scss\" --fix",
+    "prepush": "npm run lint",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shaunrfox/flexiblewidth.git"
+  },
+  "author": "Shaun Fox and Broderick Young",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shaunrfox/flexiblewidth/issues"
+  },
+  "homepage": "https://github.com/shaunrfox/flexiblewidth#readme",
+  "dependencies": {
+    "classnames": "^2.5.1",
+    "prop-types": "^15.8.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.25.9",
+    "babel-loader": "^9.2.1",
+    "css-loader": "^7.1.2",
+    "eslint": "^8.57.1",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-promise": "^6.6.0",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-standard": "^5.0.0",
+    "html-webpack-plugin": "^5.6.3",
+    "postcss-scss": "^4.0.9",
+    "sass": "^1.83.4",
+    "sass-loader": "^16.0.4",
+    "style-loader": "^4.0.0",
+    "stylelint": "^16.15.0",
+    "stylelint-config-standard-scss": "^14.0.0",
+    "stylelint-scss": "^6.11.1",
+    "webpack": "^5.98.0",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.0"
+  }
+}

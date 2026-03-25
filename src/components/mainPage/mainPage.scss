@@ -1,0 +1,11 @@
+@import "../../styles/core";
+
+.main-page {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.main-content {
+	flex-grow: 1;
+}

@@ -1,0 +1,72 @@
+@import "../../styles/core";
+
+.intro-content {
+	background: $cool-white;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	height: 100%;
+}
+
+.centering-content {
+
+}
+
+.title {
+	font-size: 20px;
+	margin-bottom: 15px;
+}
+
+.input-wrapper {
+	text-align: center;
+	margin-bottom: 15px;
+
+	>input {
+		font-size: 18px;
+		padding: 0 15px;
+		border: 1px solid rgba($off-black, .15);
+		border-radius: 4px;
+		width: 300px;
+		height: 40px;
+		background: rgba($white, .8);
+		color: $off-black;
+		transition: ease all 300ms;
+
+		&:focus {
+			outline: none;
+			background: $white;
+			color: $off-black;
+			border: 1px solid $mid-grey;
+		}
+	}
+}
+
+.hint {
+	text-align: center;
+	font-size: 14px;
+	color: $mid-grey;
+}
+
+.view-site-wrapper {
+	text-align: center;
+}
+
+.view-site {
+	border: 0;
+	background: $cyan;
+	padding: 5px;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	border-radius: 4px;
+	cursor: pointer;
+	font-weight: bold;
+
+	&:hover {
+		background: lighten($cyan, 10%);
+	}
+
+	&:focus {
+		outline: 0;
+	}
+}
