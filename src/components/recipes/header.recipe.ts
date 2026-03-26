@@ -4,12 +4,15 @@ export const headerRecipe = sva({
   slots: ["root", "left", "brand", "urlForm", "sizePicker"],
   base: {
     root: {
+      position: "relative",
       alignItems: "stretch",
       background: "surface",
       color: "text",
       display: "flex",
       justifyContent: "space-between",
       minHeight: "40",
+      zIndex: "1000",
+      boxShadow: "raised",
       smDown: {
         alignItems: "flex-start",
         flexDirection: "column",
@@ -39,10 +42,11 @@ export const headerRecipe = sva({
     },
     urlForm: {
       alignItems: "center",
-      background: "bg.input",
+      // background: "bg.input",
       borderStart: "default",
       display: "flex",
-      width: "224",
+      minWidth: "224",
+      width: "fit",
       smDown: {
         borderStart: "none",
         width: "full",

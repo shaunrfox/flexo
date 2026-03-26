@@ -1,24 +1,24 @@
 {
-  "name": "flexy-plexy-returns",
+  "name": "flexo",
   "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vp dev",
-    "build": "panda codegen && tsc -b && vp build",
-    "build:pages": "panda codegen && tsc -b && GITHUB_PAGES=true vp build",
+    "build": "npx panda && tsc -b && vp build",
+    "build:pages": "npx panda && tsc -b && GITHUB_PAGES=true vp build",
     "lint": "eslint .",
     "check": "vp check",
     "preview": "vp preview",
-    "prepare": "panda codegen",
-    "panda": "panda codegen",
-    "panda:watch": "panda codegen --watch"
+    "prepare": "npx panda",
+    "panda": "npx panda",
+    "panda:watch": "npx panda --watch"
   },
   "dependencies": {
     "@fontsource-variable/piazzolla": "^5.2.8",
     "@fontsource/ibm-plex-mono": "^5.2.7",
     "@fontsource/ibm-plex-sans": "^5.2.8",
-    "@okshaun/components": "^1.0.2",
+    "@okshaun/components": "^2.0.2",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   },
@@ -36,6 +36,8 @@
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.57.0",
     "vite": "npm:@voidzero-dev/vite-plus-core@latest",
+    "vite-plugin-dts": "^4.5.4",
+    "vite-plugin-static-copy": "^3.1.4",
     "vite-plus": "latest"
   },
   "overrides": {

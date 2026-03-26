@@ -1,6 +1,6 @@
-import { Box, Link, Text, ThemeSwitcher } from "@okshaun/components";
-import { actionButtonRecipe } from "./recipes/action-button.recipe.ts";
+import { Button, ThemeSwitcher } from "@okshaun/components";
 import { footerRecipe } from "./recipes/footer.recipe.ts";
+import { Flex } from "@styled-system/jsx";
 
 type AppFooterProps = {
   onOpenAbout: () => void;
@@ -10,27 +10,33 @@ export function AppFooter({ onOpenAbout }: AppFooterProps) {
   const classes = footerRecipe();
 
   return (
-    <Box as="footer" className={classes.root}>
-      <Box
-        as="button"
-        className={actionButtonRecipe({ kind: "footer" })}
+    <Flex as="footer" className={classes.root}>
+      <Button
+        // className={actionButtonRecipe({ kind: "footer" })}
         onClick={onOpenAbout}
-        type="button"
+        variant="hollow"
+        size="sm"
+        fontFamily="mono"
+        fontSize="12"
       >
         About
-      </Box>
-      <Text as="span" className={classes.divider}>
+      </Button>
+      {/*<Text as="span" className={classes.divider}>
         /
-      </Text>
-      <Link
-        className={actionButtonRecipe({ kind: "footer" })}
-        href="https://github.com/shaunrfox/flexiblewidth"
+      </Text>*/}
+      <Button
+        // className={actionButtonRecipe({ kind: "footer" })}
+        href="https://github.com/shaunrfox/flexo"
         rel="noreferrer"
         target="_blank"
+        variant="hollow"
+        size="sm"
+        fontFamily="mono"
+        fontSize="12"
       >
         Github
-      </Link>
-      <ThemeSwitcher className={classes.themeSwitcher} />
-    </Box>
+      </Button>
+      <ThemeSwitcher ml="auto" />
+    </Flex>
   );
 }

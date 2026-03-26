@@ -4,12 +4,16 @@ export const footerRecipe = sva({
   slots: ["root", "divider", "themeSwitcher"],
   base: {
     root: {
+      position: "relative",
       alignItems: "center",
       background: "surface",
       display: "flex",
-      gap: "4",
+      gap: "8",
       minHeight: "24",
-      px: "14",
+      px: "8",
+      py: "4",
+      zIndex: "1000",
+      boxShadow: "raised.up",
     },
     divider: {
       color: "text.subtlest",

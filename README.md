@@ -1,4 +1,4 @@
-# Flexy Plexy Returns
+# Flexo
 
 A rebuild of the old Flexiblewidth app on React 19, Vite+, Panda CSS, and `@okshaun/components`.
 
@@ -29,7 +29,7 @@ vp build
 
 ## GitHub Pages prep
 
-The repo now includes [`.github/workflows/pages.yml`](/Users/shaunfox/Documents/bigfootcode/flexy-plexy-returns/.github/workflows/pages.yml), which builds and deploys to GitHub Pages on pushes to `main`.
+The repo now includes [`.github/workflows/pages.yml`](./.github/workflows/pages.yml), which builds and deploys to GitHub Pages on pushes to `main`.
 
 Locally, the Pages build uses the repo base path:
 

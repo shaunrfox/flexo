@@ -28,28 +28,36 @@ export const fieldRecipe = cva({
         background: "transparent",
         border: "none",
         fontSize: "12",
-        h: "40",
-        px: "10",
+        h: "full",
+        borderRadius: "0",
+        _focusWithin: {
+          bg: "bg.accent.blue/10",
+        },
+        // px: "10",
       },
       landing: {
-        background: "bg.input",
-        border: "input",
-        borderRadius: "2",
-        fontSize: "16",
-        h: "40",
+        // background: "bg.input",
+        // border: "input",
+        // borderRadius: "2",
+        // fontSize: "16",
+        // h: "40",
         maxWidth: "xs",
-        px: "12",
+        // px: "12",
+        // "& > input": {
+        //   w: "full",
+        //   m: "-1",
+        // },
       },
     },
-    invalid: {
-      true: {
-        borderColor: "border.danger",
-        outlineColor: "border.danger",
-      },
-    },
+    // invalid: {
+    //   true: {
+    //     borderColor: "border.danger",
+    //     outlineColor: "border.danger",
+    //   },
+    // },
   },
   defaultVariants: {
-    invalid: false,
+    // invalid: false,
     surface: "landing",
   },
 });

@@ -174,7 +174,7 @@ function App() {
         selectedWidth={resolvedPreviewWidth}
       />
 
-      <Box as="main" className={mainRecipe()}>
+      <Box as="main" className={mainRecipe()} position="relative" zIndex="1">
         {activeUrl ? (
           <PreviewWorkspace
             activeUrl={activeUrl}

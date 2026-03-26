@@ -16,7 +16,7 @@ export const workspaceRecipe = sva({
       position: "absolute",
       right: "0",
       top: "0",
-      zIndex: 2,
+      zIndex: "2",
     },
     divider: {
       alignItems: "center",
@@ -29,7 +29,7 @@ export const workspaceRecipe = sva({
       padding: "0",
       position: "relative",
       width: "6",
-      zIndex: 3,
+      zIndex: "3",
     },
     dividerMarker: {
       background: "bg.neutral.boldest",

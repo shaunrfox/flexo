@@ -4,8 +4,8 @@ export const actionButtonRecipe = cva({
   base: {
     alignItems: "center",
     appearance: "none",
-    background: "transparent",
-    border: "none",
+    // background: "transparent",
+    // border: "none",
     cursor: "pointer",
     display: "inline-flex",
     justifyContent: "center",
@@ -25,12 +25,12 @@ export const actionButtonRecipe = cva({
   variants: {
     kind: {
       preset: {
-        color: "text.subtlest",
+        // color: "text.subtlest",
         fontFamily: "mono",
         fontSize: "12",
         fontWeight: "medium",
-        px: "0",
-        py: "0",
+        // px: "0",
+        // py: "0",
       },
       submit: {
         background: "bg.selected.bold",
@@ -44,20 +44,21 @@ export const actionButtonRecipe = cva({
         py: "6",
         textTransform: "uppercase",
       },
-      clear: {
-        color: "text.subtlest",
-        fontFamily: "mono",
-        fontSize: "20",
-        h: "40",
-        px: "12",
-      },
+      // clear: {
+      //   // color: "text.subtlest",
+      //   fontFamily: "mono",
+      //   fontSize: "20",
+      //   h: "40",
+      //   px: "12",
+      // },
       footer: {
         color: "link",
         fontFamily: "mono",
         fontSize: "12",
-        px: "0",
-        py: "0",
-        textDecoration: "underline",
+        // px: "0",
+        // py: "0",
+        // bg: "transparent",
+        // textDecoration: "underline",
       },
       close: {
         color: "text.subtlest",
@@ -67,13 +68,14 @@ export const actionButtonRecipe = cva({
         p: "0",
       },
     },
-    active: {
-      true: {
-        color: "text.selected",
-      },
-    },
+    // active: {
+    //   true: {
+    //     color: "text.in.selected",
+    //   },
+    // },
   },
   defaultVariants: {
-    active: false,
+    kind: "preset",
+    // active: false,
   },
 });
