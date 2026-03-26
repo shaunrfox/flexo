@@ -5,11 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vp dev",
-    "build": "tsc -b && vp build",
-    "build:pages": "GITHUB_PAGES=true tsc -b && vp build",
+    "build": "panda codegen && tsc -b && vp build",
+    "build:pages": "panda codegen && tsc -b && GITHUB_PAGES=true vp build",
     "lint": "eslint .",
     "check": "vp check",
-    "preview": "vp preview"
+    "preview": "vp preview",
+    "prepare": "panda codegen",
+    "panda": "panda codegen",
+    "panda:watch": "panda codegen --watch"
   },
   "dependencies": {
     "@fontsource-variable/piazzolla": "^5.2.8",

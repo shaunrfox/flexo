@@ -1,6 +1,6 @@
 # Flexy Plexy Returns
 
-A fresh rebuild of the old Flexiblewidth app on React 19, Vite+, and `@okshaun/components`.
+A rebuild of the old Flexiblewidth app on React 19, Vite+, Panda CSS, and `@okshaun/components`.
 
 ## What it does
 
@@ -8,6 +8,7 @@ A fresh rebuild of the old Flexiblewidth app on React 19, Vite+, and `@okshaun/c
 - Compares a fluid preview against a fixed-width viewport.
 - Supports preset widths plus drag resizing in split mode.
 - Persists the active URL and selected width in the query string.
+- Uses Panda-generated styles with okshaun primitives instead of hand-written component CSS.
 
 ## Run locally
 
@@ -28,10 +29,18 @@ vp build
 
 ## GitHub Pages prep
 
-The Vite config supports a Pages build via `GITHUB_PAGES=true`. For this repo name:
+The repo now includes [`.github/workflows/pages.yml`](/Users/shaunfox/Documents/bigfootcode/flexy-plexy-returns/.github/workflows/pages.yml), which builds and deploys to GitHub Pages on pushes to `main`.
+
+Locally, the Pages build uses the repo base path:
 
 ```bash
-vp run build:pages
+npm run build:pages
 ```
 
-To override the base path, set `GITHUB_PAGES_BASE` before the build.
+To finish setup in GitHub:
+
+1. Open the repository on GitHub.
+2. Go to `Settings` > `Pages`.
+3. Under `Build and deployment`, set `Source` to `GitHub Actions`.
+
+The workflow also respects `GITHUB_PAGES_BASE` if you need to override the detected base path.

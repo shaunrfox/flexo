@@ -6,7 +6,14 @@ import tseslint from "typescript-eslint";
 import { defineConfig, globalIgnores } from "eslint/config";
 
 export default defineConfig([
-  globalIgnores(["dist", "build", "tmp-vp-test", "tmp-vp-react", "src/components"]),
+  globalIgnores([
+    "dist",
+    "build",
+    "tmp-vp-test",
+    "tmp-vp-react",
+    "src/components",
+    "src/styled-system/**",
+  ]),
   {
     files: ["src/**/*.{ts,tsx}"],
     extends: [

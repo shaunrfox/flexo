@@ -18,14 +18,23 @@ type InitialAppState = {
 };
 
 function isPrivateHostname(hostname: string): boolean {
-  const normalizedHost = hostname.replace(/:\d+$/, "");
+  const trimmedHost = hostname.trim().toLowerCase();
+  const bracketIndex = trimmedHost.indexOf("]");
+  const normalizedHost = trimmedHost.startsWith("[")
+    ? trimmedHost.slice(1, bracketIndex === -1 ? trimmedHost.length : bracketIndex)
+    : trimmedHost.replace(/:\d+$/, "");
 
   if (
     normalizedHost === "localhost" ||
+    normalizedHost.endsWith(".localhost") ||
     normalizedHost === "127.0.0.1" ||
     normalizedHost === "0.0.0.0" ||
     normalizedHost === "::1"
   ) {
+    return true;
+  }
+
+  if (normalizedHost.startsWith("127.")) {
     return true;
   }
 
@@ -40,6 +49,19 @@ function isPrivateHostname(hostname: string): boolean {
   }
 
   return false;
+}
+
+function getAuthorityCandidate(value: string): string {
+  const normalized = value.replace(/^\/\//, "");
+  return normalized.split(/[/?#]/, 1)[0] ?? "";
+}
+
+function normalizeSchemeLessInput(value: string): string {
+  const normalized = value.replace(/^\/\//, "");
+  if (/^::1(?:[/?#]|$)/i.test(normalized)) {
+    return `[::1]${normalized.slice(3)}`;
+  }
+  return normalized;
 }
 
 export function clampPreviewWidth(width: number, maxWidth = 1440): number {
@@ -60,7 +82,9 @@ export function normalizePreviewUrl(input: string): PreviewUrlResult {
   }
 
   if (!trimmed.includes("://")) {
-    const prefixed = `${isPrivateHostname(trimmed.split("/")[0] ?? "") ? "http" : "https"}://${trimmed}`;
+    const normalizedInput = normalizeSchemeLessInput(trimmed);
+    const authorityCandidate = getAuthorityCandidate(normalizedInput);
+    const prefixed = `${isPrivateHostname(authorityCandidate) ? "http" : "https"}://${normalizedInput}`;
 
     try {
       const parsed = new URL(prefixed);

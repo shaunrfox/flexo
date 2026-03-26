@@ -28,6 +28,48 @@ describe("normalizePreviewUrl", () => {
     });
   });
 
+  test("keeps localhost paths on http", () => {
+    expect(normalizePreviewUrl("localhost:3000/foo?x=1")).toEqual({
+      ok: true,
+      url: "http://localhost:3000/foo?x=1",
+    });
+  });
+
+  test("keeps loopback ipv4 shorthands on http", () => {
+    expect(normalizePreviewUrl("127.1:3000")).toEqual({
+      ok: true,
+      url: "http://127.0.0.1:3000/",
+    });
+  });
+
+  test("keeps localhost subdomains on http", () => {
+    expect(normalizePreviewUrl("app.localhost:3000")).toEqual({
+      ok: true,
+      url: "http://app.localhost:3000/",
+    });
+  });
+
+  test("keeps bracketed ipv6 loopback on http", () => {
+    expect(normalizePreviewUrl("[::1]:3000")).toEqual({
+      ok: true,
+      url: "http://[::1]:3000/",
+    });
+  });
+
+  test("normalizes bare ipv6 loopback before parsing", () => {
+    expect(normalizePreviewUrl("::1")).toEqual({
+      ok: true,
+      url: "http://[::1]/",
+    });
+  });
+
+  test("accepts scheme-relative localhost input", () => {
+    expect(normalizePreviewUrl("//localhost:3000")).toEqual({
+      ok: true,
+      url: "http://localhost:3000/",
+    });
+  });
+
   test("rejects unsupported protocols", () => {
     expect(normalizePreviewUrl("ftp://example.com")).toEqual({
       ok: false,
