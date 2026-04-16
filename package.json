@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "companion": "node ./companion/server.mjs",
     "dev": "vp dev",
     "build": "npx panda && tsc -b && vp build",
     "build:pages": "npx panda && tsc -b && GITHUB_PAGES=true vp build",
@@ -19,6 +20,8 @@
     "@fontsource/ibm-plex-mono": "^5.2.7",
     "@fontsource/ibm-plex-sans": "^5.2.8",
     "@okshaun/components": "^2.0.2",
+    "jszip": "^3.10.1",
+    "playwright": "^1.59.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   },

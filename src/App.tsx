@@ -14,6 +14,7 @@ import { AppHeader } from "./components/app-header.tsx";
 import { LandingForm } from "./components/landing-form.tsx";
 import { PreviewWorkspace } from "./components/preview-workspace.tsx";
 import { mainRecipe, shellRecipe } from "./components/recipes/shell.recipe.ts";
+import { downloadCompanionScreenshots } from "./lib/screenshot-companion.ts";
 import {
   DEFAULT_PREVIEW_WIDTH,
   clampPreviewWidth,
@@ -32,6 +33,8 @@ function App() {
   const [activeUrl, setActiveUrl] = useState(initialState.activeUrl);
   const [previewWidth, setPreviewWidth] = useState(initialState.previewWidth);
   const [previewNonce, setPreviewNonce] = useState(0);
+  const [screenshotError, setScreenshotError] = useState<string | null>(null);
+  const [isDownloadingScreenshots, setIsDownloadingScreenshots] = useState(false);
   const [urlError, setUrlError] = useState<string | null>(null);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
@@ -135,6 +138,7 @@ function App() {
     }
 
     setUrlError(null);
+    setScreenshotError(null);
     setDraftUrl(result.url);
     startTransition(() => {
       setActiveUrl(result.url);
@@ -149,11 +153,35 @@ function App() {
 
   const handleReset = () => {
     setUrlError(null);
+    setScreenshotError(null);
     setDraftUrl("");
     startTransition(() => {
       setActiveUrl("");
       setPreviewNonce((current) => current + 1);
     });
+  };
+
+  const handleDownloadScreenshots = async () => {
+    if (!activeUrl || isDownloadingScreenshots) {
+      return;
+    }
+
+    setScreenshotError(null);
+    setIsDownloadingScreenshots(true);
+
+    try {
+      await downloadCompanionScreenshots({
+        fixedWidth: resolvedPreviewWidth,
+        fluidWidth,
+        url: activeUrl,
+      });
+    } catch (error) {
+      setScreenshotError(
+        error instanceof Error ? error.message : "Screenshot download failed unexpectedly.",
+      );
+    } finally {
+      setIsDownloadingScreenshots(false);
+    }
   };
 
   const handleDividerPointerDown = (event: ReactPointerEvent<HTMLButtonElement>) => {
@@ -166,13 +194,29 @@ function App() {
       <AppHeader
         activeUrl={activeUrl}
         draftUrl={draftUrl}
+        isDownloadingScreenshots={isDownloadingScreenshots}
         onDraftUrlChange={handleDraftUrlChange}
+        onDownloadScreenshots={handleDownloadScreenshots}
         onReset={handleReset}
         onSelectWidth={setPreviewWidth}
         onSubmit={handleLaunch}
         presetWidths={PRESET_WIDTHS}
         selectedWidth={resolvedPreviewWidth}
       />
+
+      {screenshotError ? (
+        <Box
+          background="surface.overlay"
+          borderBottom="default"
+          color="text.subtlest"
+          fontFamily="mono"
+          fontSize="12"
+          px="16"
+          py="8"
+        >
+          {screenshotError}
+        </Box>
+      ) : null}
 
       <Box as="main" className={mainRecipe()} position="relative" zIndex="1">
         {activeUrl ? (

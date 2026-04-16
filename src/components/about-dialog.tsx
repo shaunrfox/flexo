@@ -1,4 +1,11 @@
-import { Box, Link, Modal, ModalBody, ModalHeader, Text } from "@okshaun/components";
+import {
+  Box,
+  Link,
+  Modal,
+  ModalBody,
+  ModalHeader,
+  Text,
+} from "@okshaun/components";
 import { dialogRecipe } from "./recipes/dialog.recipe.ts";
 
 type AboutDialogProps = {
@@ -14,13 +21,18 @@ export function AboutDialog({ open, onClose }: AboutDialogProps) {
   }
 
   return (
-    <Modal className={classes.panel} onOpenChange={onClose} open={open} size="sm">
-      <ModalHeader className={classes.header} title="About Flexiblewidth.com" />
+    <Modal
+      className={classes.panel}
+      onOpenChange={onClose}
+      open={open}
+      size="sm"
+    >
+      <ModalHeader className={classes.header} title="About Flexo" />
       <ModalBody className={classes.body}>
         <Text as="p" className={classes.copy}>
-          We built this tool to help us visualize a website at two sizes at once. This can certainly
-          help with a published site, but can also be really handy to see right as you&apos;re
-          building your site locally.
+          We built this tool to help us visualize a website at two sizes at
+          once. This can certainly help with a published site, but can also be
+          really handy to see right as you&apos;re building your site locally.
         </Text>
         <Box className={classes.rule} />
         <Text as="div" className={classes.label}>
