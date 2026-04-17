@@ -10,7 +10,12 @@ type LandingFormProps = {
   onSubmit: (event: SubmitEvent<HTMLFormElement>) => void;
 };
 
-export function LandingForm({ draftUrl, urlError, onDraftUrlChange, onSubmit }: LandingFormProps) {
+export function LandingForm({
+  draftUrl,
+  urlError,
+  onDraftUrlChange,
+  onSubmit,
+}: LandingFormProps) {
   const classes = landingRecipe({ tone: urlError ? "error" : "hint" });
 
   return (
@@ -24,7 +29,6 @@ export function LandingForm({ draftUrl, urlError, onDraftUrlChange, onSubmit }: 
           size="xl"
           maxWidth="xs"
           error={Boolean(urlError)}
-          // className={fieldRecipe({ surface: "landing", invalid: Boolean(urlError) })}
           name="site-url"
           onChange={(event: ChangeEvent<HTMLInputElement>) =>
             onDraftUrlChange(event.currentTarget.value)
@@ -35,7 +39,11 @@ export function LandingForm({ draftUrl, urlError, onDraftUrlChange, onSubmit }: 
           value={draftUrl}
         />
         {draftUrl.trim() ? (
-          <Box as="button" className={actionButtonRecipe({ kind: "submit" })} type="submit">
+          <Box
+            as="button"
+            className={actionButtonRecipe({ kind: "submit" })}
+            type="submit"
+          >
             View Site
           </Box>
         ) : (

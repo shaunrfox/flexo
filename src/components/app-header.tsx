@@ -1,5 +1,5 @@
 import { Box, Button, Chip, ChipGroup, TextInput } from "@okshaun/components";
-import { Flex, HStack } from "@styled-system/jsx";
+import { HStack } from "@styled-system/jsx";
 import type { ChangeEvent, SubmitEvent } from "react";
 import { actionButtonRecipe } from "./recipes/action-button.recipe.ts";
 import { fieldRecipe } from "./recipes/field.recipe.ts";
@@ -69,9 +69,7 @@ export function AppHeader({
             variant="hollow"
             whiteSpace="nowrap"
           >
-            {isDownloadingScreenshots
-              ? "Preparing ZIP..."
-              : "Download screenshots"}
+            {isDownloadingScreenshots ? "Preparing ZIP..." : "Download screenshots"}
           </Button>
         ) : null}
         <ChipGroup

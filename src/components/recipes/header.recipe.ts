@@ -32,14 +32,11 @@ export const headerRecipe = sva({
       overflow: "hidden",
     },
     brand: {
-      // alignItems: "center",
-      // display: "flex",\
       justifySelf: "center",
       textStyle: "mono.sm",
       fontWeight: "bold",
       textTransform: "uppercase",
       letterSpacing: "widest",
-      // color: "text",
       mx: "4",
       outlineWidth: "[0px]",
       outlineStyle: "solid",
@@ -49,11 +46,6 @@ export const headerRecipe = sva({
         outlineWidth: "[20px]",
         outlineColor: "blue.50",
       },
-      // whiteSpace: "nowrap",
-      // smDown: {
-      //   pb: "8",
-      //   px: "0",
-      // },
     },
     urlForm: {
       alignItems: "center",
@@ -70,7 +62,6 @@ export const headerRecipe = sva({
     sizePicker: {
       alignItems: "center",
       display: "flex",
-      // flexWrap: "wrap",
       gap: "12",
       justifyContent: "flex-end",
       px: "14",

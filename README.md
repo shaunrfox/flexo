@@ -18,7 +18,7 @@ A rebuild of the old Flexiblewidth app on React 19, Vite+, Panda CSS, and `@oksh
 
 ```bash
 vp install
-vp dev
+npm run dev:all
 ```
 
 Then open the local Vite URL shown in the terminal.
@@ -42,7 +42,7 @@ Install the browser binary once:
 npx playwright install chromium
 ```
 
-Start the companion in another terminal:
+The combined local dev command already starts the companion. If you want to run it separately:
 
 ```bash
 npm run companion

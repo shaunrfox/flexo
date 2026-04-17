@@ -56,9 +56,7 @@ export async function downloadCompanionScreenshots({
       method: "POST",
     });
   } catch {
-    throw new Error(
-      `Screenshot companion is offline. Start it with: ${START_COMMAND}`,
-    );
+    throw new Error(`Screenshot companion is offline. Start it with: ${START_COMMAND}`);
   }
 
   if (!response.ok) {
