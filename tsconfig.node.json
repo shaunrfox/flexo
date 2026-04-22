@@ -6,7 +6,7 @@
     "module": "ESNext",
     "types": ["node"],
     "skipLibCheck": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
@@ -16,11 +16,7 @@
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true,
-    "paths": {
-      "@styled-system/*": ["./src/styled-system/*"],
-    },
-    "jsx": "react-jsx",
+    "noUncheckedSideEffectImports": true
   },
   "include": ["vite.config.ts"],
 }
