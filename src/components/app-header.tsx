@@ -9,7 +9,13 @@ type AppHeaderProps = {
   activeUrl: string;
   draftUrl: string;
   isDownloadingScreenshots: boolean;
-  presetWidths: readonly number[];
+  presetWidths: Record<
+    string,
+    {
+      rem: string;
+      pz: string;
+    }
+  >;
   selectedWidth: number;
   onDraftUrlChange: (value: string) => void;
   onDownloadScreenshots: () => void;
@@ -69,7 +75,9 @@ export function AppHeader({
             variant="hollow"
             whiteSpace="nowrap"
           >
-            {isDownloadingScreenshots ? "Preparing ZIP..." : "Download screenshots"}
+            {isDownloadingScreenshots
+              ? "Preparing ZIP..."
+              : "Download screenshots"}
           </Button>
         ) : null}
         <ChipGroup
@@ -78,18 +86,24 @@ export function AppHeader({
           type="single"
           value={String(selectedWidth)}
         >
-          {presetWidths.map((width) => (
-            <Chip
-              key={width}
-              className={actionButtonRecipe({
-                kind: "preset",
-              })}
-              size="sm"
-              value={String(width)}
-            >
-              {width}
-            </Chip>
-          ))}
+          {Object.entries(presetWidths)
+            .reverse()
+            .map(([size, { pz }]) => {
+              const width = Number.parseInt(pz, 10);
+
+              return (
+                <Chip
+                  key={size}
+                  className={actionButtonRecipe({
+                    kind: "preset",
+                  })}
+                  size="sm"
+                  value={String(width)}
+                >
+                  {`${size}:${width}`}
+                </Chip>
+              );
+            })}
         </ChipGroup>
       </Box>
     </Box>

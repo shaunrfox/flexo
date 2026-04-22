@@ -22,19 +22,53 @@ import {
   normalizePreviewUrl,
 } from "./lib/url.ts";
 
-const PRESET_WIDTHS = [1080, 800, 768, 720, 540, 480, 375, 320, 240] as const;
+const BREAKPOINTS = {
+  "2xs": {
+    rem: "20rem",
+    pz: "320px",
+  },
+  xs: {
+    rem: "30rem",
+    pz: "480px",
+  },
+  sm: {
+    rem: "40rem",
+    pz: "640px",
+  },
+  md: {
+    rem: "48rem",
+    pz: "768px",
+  },
+  lg: {
+    rem: "64rem",
+    pz: "1024px",
+  },
+  xl: {
+    rem: "80rem",
+    pz: "1280px",
+  },
+  "2xl": {
+    rem: "96rem",
+    pz: "1536px",
+  },
+};
+
+// const PRESET_WIDTHS = [1080, 800, 768, 720, 540, 480, 375, 320, 240] as const;
 const DIVIDER_WIDTH = 6;
 const MIN_FLUID_WIDTH = 320;
 const STACKED_BREAKPOINT = 880;
 
 function App() {
-  const [initialState] = useState(() => getInitialAppState(window.location.search));
+  const [initialState] = useState(() =>
+    getInitialAppState(window.location.search),
+  );
   const [draftUrl, setDraftUrl] = useState(initialState.draftUrl);
   const [activeUrl, setActiveUrl] = useState(initialState.activeUrl);
   const [previewWidth, setPreviewWidth] = useState(initialState.previewWidth);
   const [previewNonce, setPreviewNonce] = useState(0);
   const [screenshotError, setScreenshotError] = useState<string | null>(null);
-  const [isDownloadingScreenshots, setIsDownloadingScreenshots] = useState(false);
+  const [isDownloadingScreenshots, setIsDownloadingScreenshots] =
+    useState(false);
   const [urlError, setUrlError] = useState<string | null>(null);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
@@ -46,27 +80,35 @@ function App() {
   const isDraggingActive = isDragging && !isStackedLayout;
   const maxPreviewWidth = isStackedLayout
     ? Math.max(DEFAULT_PREVIEW_WIDTH, measuredWorkspaceWidth)
-    : Math.max(DEFAULT_PREVIEW_WIDTH, measuredWorkspaceWidth - DIVIDER_WIDTH - MIN_FLUID_WIDTH);
+    : Math.max(
+        DEFAULT_PREVIEW_WIDTH,
+        measuredWorkspaceWidth - DIVIDER_WIDTH - MIN_FLUID_WIDTH,
+      );
   const resolvedPreviewWidth = clampPreviewWidth(previewWidth, maxPreviewWidth);
   const fluidWidth = isStackedLayout
     ? measuredWorkspaceWidth
-    : Math.max(MIN_FLUID_WIDTH, measuredWorkspaceWidth - DIVIDER_WIDTH - resolvedPreviewWidth);
+    : Math.max(
+        MIN_FLUID_WIDTH,
+        measuredWorkspaceWidth - DIVIDER_WIDTH - resolvedPreviewWidth,
+      );
 
-  const persistUrlState = useEffectEvent((nextUrl: string, nextWidth: number) => {
-    const url = new URL(window.location.href);
+  const persistUrlState = useEffectEvent(
+    (nextUrl: string, nextWidth: number) => {
+      const url = new URL(window.location.href);
 
-    if (!nextUrl) {
-      url.searchParams.delete("url");
-      url.searchParams.delete("width");
-    } else {
-      url.searchParams.set("url", nextUrl);
-      url.searchParams.set("width", String(nextWidth));
-    }
+      if (!nextUrl) {
+        url.searchParams.delete("url");
+        url.searchParams.delete("width");
+      } else {
+        url.searchParams.set("url", nextUrl);
+        url.searchParams.set("width", String(nextWidth));
+      }
 
-    const nextSearch = url.searchParams.toString();
-    const nextHref = `${url.pathname}${nextSearch ? `?${nextSearch}` : ""}${url.hash}`;
-    window.history.replaceState({}, "", nextHref);
-  });
+      const nextSearch = url.searchParams.toString();
+      const nextHref = `${url.pathname}${nextSearch ? `?${nextSearch}` : ""}${url.hash}`;
+      window.history.replaceState({}, "", nextHref);
+    },
+  );
 
   const handlePointerMove = useEffectEvent((event: PointerEvent) => {
     if (!isDraggingActive || !workspaceRef.current) {
@@ -77,7 +119,10 @@ function App() {
     const nextWidth = Math.round(bounds.right - event.clientX);
     const clampedWidth = clampPreviewWidth(
       nextWidth,
-      Math.max(DEFAULT_PREVIEW_WIDTH, bounds.width - DIVIDER_WIDTH - MIN_FLUID_WIDTH),
+      Math.max(
+        DEFAULT_PREVIEW_WIDTH,
+        bounds.width - DIVIDER_WIDTH - MIN_FLUID_WIDTH,
+      ),
     );
     setPreviewWidth(clampedWidth);
   });
@@ -177,14 +222,18 @@ function App() {
       });
     } catch (error) {
       setScreenshotError(
-        error instanceof Error ? error.message : "Screenshot download failed unexpectedly.",
+        error instanceof Error
+          ? error.message
+          : "Screenshot download failed unexpectedly.",
       );
     } finally {
       setIsDownloadingScreenshots(false);
     }
   };
 
-  const handleDividerPointerDown = (event: ReactPointerEvent<HTMLButtonElement>) => {
+  const handleDividerPointerDown = (
+    event: ReactPointerEvent<HTMLButtonElement>,
+  ) => {
     event.currentTarget.setPointerCapture(event.pointerId);
     setIsDragging(true);
   };
@@ -200,7 +249,7 @@ function App() {
         onReset={handleReset}
         onSelectWidth={setPreviewWidth}
         onSubmit={handleLaunch}
-        presetWidths={PRESET_WIDTHS}
+        presetWidths={BREAKPOINTS}
         selectedWidth={resolvedPreviewWidth}
       />
 
